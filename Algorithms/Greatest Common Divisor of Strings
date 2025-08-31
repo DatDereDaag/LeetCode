@@ -1,0 +1,45 @@
+/*
+    -Traverse from smallest string going backwards
+    -Check if current sub string is a factor of both, if not continue
+    -If previous step true, repeat the current sub string the number of times
+        it goes into each string and compare if they are similiar
+    -If previou sstep true, return this sub string else continue
+    -If entire string traversed, return "";
+
+    *Edge cases include empty strings and strings where one of the string itself is the
+        required substring 
+*/
+
+class Solution {
+public:
+    string repeat_string(string str, int i){
+        string res = "";
+
+        for(int j = 0; j< i; j++){
+            res += str;
+        }
+
+        return res;
+     }
+
+    string gcdOfStrings(string str1, string str2) {
+        int len1 = str1.size();
+        int len2 = str2.size();
+
+        for(int i = min(len1,len2); i >0; i--){
+            if(len1 % i || len2 % i)
+                continue;
+            else{
+                int repetitions1 = len1/i;
+                int repetitions2 = len2/i;
+
+                if( str1 == repeat_string(str1.substr(0,i), repetitions1) && 
+                    str2 == repeat_string(str1.substr(0,i), repetitions2)  ){
+
+                    return str1.substr(0,i);
+                }
+            }
+        }
+        return "";
+    }
+};
