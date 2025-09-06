@@ -1,0 +1,30 @@
+/*
+    -2 passes needed, one to get initial candies and another to get the output
+        array.
+    -Traverse array first and find largest in array
+    -Add extra candies to array in second pass and compare to largest found,
+        add true to output array if more than or false otherwise
+*/
+
+class Solution {
+public:
+    vector<bool> kidsWithCandies(vector<int>& candies, int extraCandies) {
+        int largest = 0;
+        vector<bool> output;
+
+        for(auto& candy : candies){
+            if(candy > largest)
+                largest = candy;
+        }      
+
+        
+        for(auto& candy : candies){
+            if(candy + extraCandies >= largest)
+                output.push_back(true);
+            else
+                output.push_back(false);
+        }  
+
+        return output;
+    }
+};
