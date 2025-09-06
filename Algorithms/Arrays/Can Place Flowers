@@ -1,0 +1,53 @@
+/*
+    -Traverse entire array once taking note of free spots
+    -Flowers can be placed on 0s surrounded by 0s
+    -Increment counter of available spots when above criteria met and place a 1
+        in position to note flower placement.
+    -Cater for beginning of loop and end accordingly.
+*/
+
+class Solution {
+public:
+    bool canPlaceFlowers(vector<int>& flowerbed, int n) {
+        if(n == 0) return true;
+
+        if(flowerbed.size() == 1){
+            if (flowerbed[0] == 0)
+                return true;
+            else
+                return false;
+        }
+        
+        if(flowerbed.size() == 0)
+            return false;
+
+        for(size_t place = 0; place < flowerbed.size(); place++){
+            if(place == 0){
+                if(flowerbed[place] == 0 && (flowerbed[place+1] == 0)){
+                    flowerbed[place] = 1;
+                    n--;
+                }
+
+                if(n == 0)
+                    return true;
+                    
+                continue;
+            }
+            if(place == flowerbed.size()-1){
+                if(flowerbed[place] == 0 && flowerbed[place-1] == 0){
+                    flowerbed[place] = 1;
+                    n--;
+                }
+            }
+            if(flowerbed[place] == 0 && flowerbed[place-1] == 0 && flowerbed[place+1] == 0){
+                flowerbed[place] = 1;
+                n--;
+            }
+
+            if(n == 0)
+                return true;
+        }
+
+        return false;      
+    }
+};
